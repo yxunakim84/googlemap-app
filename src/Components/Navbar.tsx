@@ -10,7 +10,7 @@ function ColorSchemesExample() {
   let navigate = useNavigate();
   return (
     <>
-      <Navbar bg="dark" variant="dark" style={{position: 'absolute', top: '0', zIndex: '10', width: '375px', height: '50px'}}>
+      <Navbar bg="dark" variant="dark" style={{position: 'absolute', top: '0', zIndex: '10', width: '375px'}}>
         <Container>
           <Navbar.Brand onClick={() => navigate('/')}>Home</Navbar.Brand>
           <Nav className="me-auto">
