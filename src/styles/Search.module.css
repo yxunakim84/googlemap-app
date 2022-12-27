@@ -79,7 +79,7 @@
   /* filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.32)); */
   border-radius: 10px;
   width: 70%;
-  height: 80%;
+  height: 88%;
   filter:
   drop-shadow(0 0px 8px rgba(0, 0, 0, 0.1))
   drop-shadow(0 0px 3px rgba(0, 0, 0, 0.12))
@@ -101,20 +101,30 @@
   align-items: flex-start;
   width: 100%;
   height: auto;
+  gap: 0.3rem;
 }
 
+.contentBox span {
+  word-break:break-all;
+  text-align: left;
+}
 .contentBox img {
   width: 0.8rem;
-  margin-right: 5px;
+  margin-right: 0.5rem;
 }
 
 .imgWrapper {
-  display: flex;
+  position: relative;
+  /* display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
   width: 100%;
+  height: 70%;
+  margin-top: 0.5rem;
 }
 .placeImg {
-  width: 70%;
+  width: 200px;
+  height: 33vh;
+  /* object-fit: cover; */
 }
