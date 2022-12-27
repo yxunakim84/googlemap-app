@@ -1,0 +1,22 @@
+.container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+}
+
+.view {
+  position: relative;
+  width: 100%;
+  min-width: 320px;
+  max-width: 500px;
+  /* background-image: url(/background.png); */
+  background-repeat: repeat-y;
+  background-size: 100% auto;
+}
