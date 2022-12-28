@@ -5,16 +5,16 @@ import styles from '../styles/Home.module.css';
 function Home() {
 
   return (
-    <>
+    <div>
       {/* <input onChange={(e) => {setPlace(e.target.value)}}></input>
       <button onClick={() => {setSearch(true)}}>검색</button> */}
-        <div className={styles.wrapper}>
+        <div className={styles.wrapper} style={{height: '100vh'}}>
           <img className={styles.circleimg} src='/circle.png' />      
           <span className={styles.text1}>나만의 공간을 찾아서,</span>
           <span className={styles.text2}>Search Place</span>
           <img className={styles.bgimg} src='/image.png'></img>
         </div>
-    </>
+    </div>
   )
 }
 

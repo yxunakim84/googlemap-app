@@ -24,12 +24,10 @@
 } */
 
 div {
-  height: 100%;
-  /* min-width: 375px; */
   width: 375px;
-  /* max-width: 500px; */
 }
 
 .bg {
+  
   height: 100vh;
 }

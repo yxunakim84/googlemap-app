@@ -2,6 +2,13 @@ import { useDispatch, useSelector} from "react-redux";
 import styles from "../styles/Detail.module.css";
 import {Button, ListGroup} from 'react-bootstrap';
 
+interface reviewType {
+  author_name: string,
+  profile_photo_url: string,
+  rating: number,
+  text: string,
+  relative_time_description: string,
+}
 interface dataType {
   name: string,
   reviews: string[],
@@ -30,7 +37,7 @@ function Detail() {
   let data = result.data.data
   console.log(data.name);
   return (
-    <div className={styles.wrapper} style={{position: 'relative'}}>
+    <div className={styles.wrapper}>
        <div className={styles.contents}>
         <span className={styles.name}>{data.name}</span>
         <hr />
@@ -57,10 +64,43 @@ function Detail() {
           </ListGroup>
           </div>
         </div>
+        
+        <div className={styles.reviewWrapper}>
+          {data.reviews.map((reivew: reviewType)=>(
+            
+            <div className={styles.reviews}>
+              <div className={styles.profile}>
+                <img className={styles.profilePhoto} src={reivew.profile_photo_url} />
+                <div style={{width: '100%'}} className={styles.author}>{reivew.author_name}</div>
+              </div>
+              <div style={{width: '100%'}} className={styles.rating}>{drawReview(reivew.rating)}</div>
+              <div style={{width: '100%'}} className={styles.time}>{reivew.relative_time_description}</div>
+              <div style={{width: '100%'}} className={styles.text}>{reivew.text}</div>
+            </div>
+            
+          ))}
+        </div>
+        <div className={styles.photos}>
+
+        </div>
+        <div style={{height: '2rem'}}></div>
       </div> 
     </div>
   )
 
+}
+
+function drawReview(rate : number) {
+  let star = ''
+  for(let i = 0; i < rate; i++) {
+    star += '★'
+  }
+  for(let i = 0; i < 5-rate; i++) {
+    star += '☆'
+  }
+  return (
+    star
+  )
 }
 
 export default Detail

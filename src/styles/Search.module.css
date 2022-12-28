@@ -2,6 +2,7 @@
   background-color:rgb(253, 247, 240);
   height: 100vh;
   position: relative;
+  /* overflow-y: auto; */
 }
 .searchBar {
   justify-content: center;
@@ -44,6 +45,7 @@
 }
 
 .informBox {
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -79,10 +81,9 @@
   /* filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.32)); */
   border-radius: 10px;
   width: 70%;
-  height: 88%;
+  height: 90%;
   filter:
-  drop-shadow(0 0px 8px rgba(0, 0, 0, 0.1))
-  drop-shadow(0 0px 3px rgba(0, 0, 0, 0.12))
+  drop-shadow(0 3px 3px rgba(0, 0, 0, 0.1))
 }
 
 .title {
@@ -116,11 +117,13 @@
 .imgWrapper {
   position: relative;
   width: 100%;
-  height: 70%;
-  margin-top: 0.5rem;
+  height: 100%;
+  overflow: auto;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 .placeImg {
   width: 200px;
-  height: 33vh;
-  /* object-fit: cover; */
+  height: 100%;
+  object-fit: cover;
 }
