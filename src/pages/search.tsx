@@ -51,24 +51,12 @@ function Search() {
   let [data, setData] = useState<dataType[]>();
   const dispatch = useDispatch();
   const navigate = useNavigate();     
-  // const fetchData = () => {
-  //   console.log('clicked');
-  //   // setPlace(''); setInform(undefined);
-  //   axios.get('/maps'+`/api/place/textsearch/json?query=${place}&key=AIzaSyA7uIJhOTUODaL2FW7MBDqQzoG043xKnSk`)
-  //     .then((res) => {setPlaceId(res.data.results[0].place_id); console.log(placeId)})
-  //     .catch(() => {
-  //       console.log('실패');
-  //     });
-      
-  //     axios.get('/maps'+`/api/place/details/json?fields=name%2Crating%2Cformatted_phone_number%2Cformatted_address%2Cphoto%2Cwebsite%2Creviews&place_id=${placeId}&key=AIzaSyA7uIJhOTUODaL2FW7MBDqQzoG043xKnSk`)
-  //     .then((res) => {console.log(res.data.result.photos); setInform(res.data.result)})
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }
-
-    
+  
   useEffect(() => {
+    if(count === 0) {
+      return;
+    }
+    else {
       //placeId 가 업뎃이 바로 안됨 placeId 가 바뀌기 전에 다음 request 가 진행되어 업뎃이 안되는거였음
       axios.get('/maps'+`/api/place/textsearch/json?query=${place}&key=AIzaSyA7uIJhOTUODaL2FW7MBDqQzoG043xKnSk`)
       .then((res) => { setPlaceId(res.data.results[0].place_id);})
@@ -76,6 +64,7 @@ function Search() {
         console.log('실패');
       });
       
+    }
       
       // axios.get('/maps'+`/api/place/details/json?fields=name%2Crating%2Cformatted_phone_number%2Cformatted_address%2Cphoto%2Cwebsite%2Creviews&place_id=${placeId}&key=AIzaSyA7uIJhOTUODaL2FW7MBDqQzoG043xKnSk`)
       // .then((res) => {console.log(res.data.result.photos); setInform(res.data.result)})
@@ -90,13 +79,19 @@ function Search() {
   }, [count]);
 
   useEffect(() => {
-    setSearch(false);
-    console.log('data 가져오는 중');
-    axios.get('/maps'+`/api/place/details/json?fields=name%2Crating%2Cformatted_phone_number%2Cformatted_address%2Cphoto%2Cwebsite%2Creviews%2Cwheelchair_accessible_entrance%2Cgeometry&place_id=${placeId}&key=AIzaSyA7uIJhOTUODaL2FW7MBDqQzoG043xKnSk`)
-    .then((res) => {setSearch(true); console.log(res.data.result); setInform(res.data.result)})
-    .catch((err) => {
-      console.log(err);
-    });
+    if(placeId === '') {
+      return
+    }
+    else {
+      setSearch(false);
+      console.log('search', search);
+      console.log('data 가져오는 중');
+      axios.get('/maps'+`/api/place/details/json?fields=name%2Crating%2Cformatted_phone_number%2Cformatted_address%2Cphoto%2Cwebsite%2Creviews%2Cwheelchair_accessible_entrance%2Cgeometry&place_id=${placeId}&key=AIzaSyA7uIJhOTUODaL2FW7MBDqQzoG043xKnSk`)
+      .then((res) => {setSearch(true); console.log(res.data.result); setInform(res.data.result)})
+      .catch((err) => {
+        console.log(err);
+      });
+    }
   }, [placeId]);
 
   return (
