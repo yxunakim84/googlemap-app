@@ -151,16 +151,23 @@
 .photos {
   padding-top: 3rem;
   width: 100%;
+  
+  text-align: center;
+  align-items: center;
+  
 }
 .photoList {
   width: 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
   /* gap: 0.1rem; */
 }
 .placeImg {
-  width: 50%;
+  /* width: 50%; */
+  width: 9rem;
+  height: 9rem;
   position: relative;
   padding: .2rem;
   object-fit: cover;
