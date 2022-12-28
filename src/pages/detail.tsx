@@ -1,6 +1,6 @@
 import { useDispatch, useSelector} from "react-redux";
 import styles from "../styles/Detail.module.css";
-import {Button, ListGroup} from 'react-bootstrap';
+import {Button, ListGroup, ButtonGroup} from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
 
 interface reviewType {
@@ -37,7 +37,7 @@ function Detail() {
   console.log(result);
   console.log('result', result.data.data);
   let data : dataType = result.data.data
-  console.log(data?.name);
+  console.log(data?.photos);
   let navigate = useNavigate();
   return (
     <div className={styles.wrapper}>
@@ -87,7 +87,10 @@ function Detail() {
           </ListGroup>
           </div>
         </div>
-        
+        <ButtonGroup aria-label="Basic example" className={styles.buttonGroup}>
+          <Button variant="secondary">reviews</Button>
+          <Button variant="secondary">photos</Button>
+        </ButtonGroup>
         <div className={styles.reviewWrapper}>
           {data.reviews?.map((reivew: reviewType)=>(
             
@@ -103,10 +106,16 @@ function Detail() {
             
           ))}
         </div>
-        <div className={styles.photos}>
 
+        <div className={styles.photos}>
+          <div className={styles.photoList}>
+            {data.photos?.map((photo) => (
+              <img className={styles.placeImg} src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=500&photo_reference=${photo.photo_reference}&key=AIzaSyA7uIJhOTUODaL2FW7MBDqQzoG043xKnSk`}/>
+            ))
+            }
+          </div>
         </div>
-        <div style={{height: '2rem'}}></div>
+        
       </div> 
   }
     </div>

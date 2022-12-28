@@ -43,6 +43,7 @@ function Search() {
   
   useEffect(() => {
     if(count === 0) {
+      console.log(count);
       return;
     }
     else {
@@ -76,8 +77,8 @@ function Search() {
       return
     }
     else {
-      setNoData(false);
       setSearch(false);
+      setNoData(false);
       axios.get('/maps'+`/api/place/details/json?fields=name%2Ctypes%2Crating%2Cformatted_phone_number%2Cformatted_address%2Cphoto%2Cwebsite%2Creviews%2Cwheelchair_accessible_entrance%2Cgeometry&place_id=${placeId}&key=AIzaSyA7uIJhOTUODaL2FW7MBDqQzoG043xKnSk`)
       .then((res) => {setSearch(true); console.log(res.data.result.types[0]); setInform(res.data.result)})
       .catch((err) => {
