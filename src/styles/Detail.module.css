@@ -33,6 +33,11 @@
   flex-direction: column;
   font-size: 15px;
 }
+.list {
+  overflow:hidden;
+  word-wrap:break-word;
+}
+
 @media (min-width: 400px) {
   .detail {
     font-size: 10px;
