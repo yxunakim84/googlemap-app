@@ -122,3 +122,9 @@
 .dog2 {
   margin-top: 3rem;
 }
+
+.type {
+  width: 100%;
+  font-size: small;
+  color: rgb(129, 129, 129, 0.8);
+}

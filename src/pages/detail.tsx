@@ -24,6 +24,7 @@ interface dataType {
       lng: number,
     }
   },
+  types: string[],
   wheelchair_accessible_entrance?: boolean,
   
 }
@@ -38,6 +39,7 @@ function Detail() {
   let data : dataType = result.data.data
   console.log(data?.name);
   let navigate = useNavigate();
+  console.log(data?.types[0]);
   return (
     <div className={styles.wrapper}>
       {result.data.data === '' 
@@ -55,7 +57,9 @@ function Detail() {
       :
       
        <div className={styles.contents}>
-        <span className={styles.name}>{data.name}</span>
+        <span className={styles.name}>{data.name}
+        </span>
+        <div className={styles.type}>{data.types[0]}</div>
         <hr />
         <div className={styles.detailWrapper}>
         <Button
@@ -66,7 +70,11 @@ function Detail() {
         <div className={styles.detail}>
           <ListGroup className={styles.list} style={{width: '100%'}}>
             <ListGroup.Item style={{width: '100%'}}>💻 웹사이트</ListGroup.Item>
-            <ListGroup.Item style={{width: '100%'}}id={styles.inform}>{data.website}</ListGroup.Item>
+            <ListGroup.Item style={{width: '100%'}} id={styles.inform}
+              onClick={()=>{ window.open(`${data.website}`)}}
+            >
+              {data.website}
+            </ListGroup.Item>
             <ListGroup.Item style={{width: '100%'}}>📍 주소</ListGroup.Item>
             <ListGroup.Item style={{width: '100%'}} id={styles.inform}>{data.formatted_address}</ListGroup.Item>
             <ListGroup.Item style={{width: '100%'}}>📞 연락처</ListGroup.Item>

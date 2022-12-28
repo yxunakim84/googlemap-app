@@ -21,6 +21,7 @@ interface placeInforms {
       lng: number,
     }
   },
+  types: string[],
   wheelchair_accessible_entrance?: boolean,
   
 }
@@ -47,7 +48,7 @@ function Search() {
     else {
       //placeId 가 업뎃이 바로 안됨 placeId 가 바뀌기 전에 다음 request 가 진행되어 업뎃이 안되는거였음
       axios.get('/maps'+`/api/place/textsearch/json?query=${place}&key=AIzaSyA7uIJhOTUODaL2FW7MBDqQzoG043xKnSk`)
-      .then((res) => { setPlaceId(res.data.results[0].place_id); setNoData(true)})
+      .then((res) => { console.log(res.data); setPlaceId(res.data.results[0].place_id); setNoData(true)})
       .catch((err) => {
         setNoData(true);
         setSearch(false);
@@ -77,8 +78,8 @@ function Search() {
     else {
       setNoData(false);
       setSearch(false);
-      axios.get('/maps'+`/api/place/details/json?fields=name%2Crating%2Cformatted_phone_number%2Cformatted_address%2Cphoto%2Cwebsite%2Creviews%2Cwheelchair_accessible_entrance%2Cgeometry&place_id=${placeId}&key=AIzaSyA7uIJhOTUODaL2FW7MBDqQzoG043xKnSk`)
-      .then((res) => {setSearch(true); console.log(res.data.result); setInform(res.data.result)})
+      axios.get('/maps'+`/api/place/details/json?fields=name%2Ctypes%2Crating%2Cformatted_phone_number%2Cformatted_address%2Cphoto%2Cwebsite%2Creviews%2Cwheelchair_accessible_entrance%2Cgeometry&place_id=${placeId}&key=AIzaSyA7uIJhOTUODaL2FW7MBDqQzoG043xKnSk`)
+      .then((res) => {setSearch(true); console.log(res.data.result.types[0]); setInform(res.data.result)})
       .catch((err) => {
         console.log(err);
       });
