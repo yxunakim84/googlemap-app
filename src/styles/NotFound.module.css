@@ -1,0 +1,13 @@
+.wrapper {
+  background-color:rgb(253, 247, 240);
+  height: 100vh;
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.contents {
+  padding: 2rem;
+  padding-top: 10rem;
+  position: relative;
+}

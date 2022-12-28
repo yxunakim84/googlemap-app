@@ -6,8 +6,6 @@ function Home() {
 
   return (
     <div className={styles.content}>
-      {/* <input onChange={(e) => {setPlace(e.target.value)}}></input>
-      <button onClick={() => {setSearch(true)}}>검색</button> */}
         <div className={styles.wrapper}>
           <img className={styles.circleimg} src='/circle.png' />      
           <span className={styles.text1}>나만의 공간을 찾아서,</span>

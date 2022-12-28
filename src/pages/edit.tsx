@@ -15,12 +15,11 @@ function Edit() {
   let [address, setAddress] = useState(data.formatted_address);
   let [contact, setContact] = useState(data.formatted_phone_number);
   let [wheelchair, setWheelchair] = useState(data.wheelchair_accessible_entrance === true ? 'O' : 'X');
-  let [rate, setRate] = useState(data.rating.toString());
-  let [location, setLocation] = useState([data.geometry.location.lat.toString(), data.geometry.location.lng.toString()]);
+  let [rate, setRate] = useState(data.rating?.toString());
+  let [location, setLocation] = useState([data.geometry.location.lat?.toString(), data.geometry.location.lng?.toString()]);
   let navigate = useNavigate();
   const [show, setShow] = useState(false);
   const target = useRef(null);
-
   let dispatch = useDispatch();
 
   return (

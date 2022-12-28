@@ -53,6 +53,10 @@
   word-wrap:break-word;
 }
 
+.list div {
+  width: 100%;
+}
+
 @media (min-width: 376px) {
   .detail {
     font-size: 10px;
@@ -64,6 +68,10 @@
 
 #inform {
   background-color: rgb(253, 247, 240);
+}
+
+#inform:hover {
+  cursor: pointer;
 }
 
 .reviewWrapper {
@@ -151,10 +159,8 @@
 .photos {
   padding-top: 1rem;
   width: 100%;
-  
   text-align: center;
   align-items: center;
-  
 }
 .photoList {
   width: 100%;
@@ -162,10 +168,8 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  /* gap: 0.1rem; */
 }
 .placeImg {
-  /* width: 50%; */
   width: 9rem;
   height: 9rem;
   position: relative;
@@ -181,7 +185,6 @@
 .buttonGroup {
   width: 100%;
   margin-top: 1rem;
-  /* width: 50%; */
   height: auto;
   opacity: 0.7;
 }

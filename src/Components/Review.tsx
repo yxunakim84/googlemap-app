@@ -1,7 +1,7 @@
 import styles from "../styles/Detail.module.css";
 import { dataType, reviewType } from "../Constants/type";
 
-function drawReview(data : dataType) {
+function DrawReview(data : dataType) {
   return (
     <div className={styles.reviewWrapper}>
       {data.reviews?.map((reivew: reviewType)=>(
@@ -34,4 +34,4 @@ function drawReviewStar(rate : number) {
   )
 }
 
-export default drawReview
+export default DrawReview

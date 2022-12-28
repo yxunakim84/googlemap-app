@@ -9,8 +9,8 @@ import { useNavigate } from 'react-router-dom';
 import { placeInforms } from '../Constants/type';
 
 function Search() {
+  const API_KEY = process.env.REACT_APP_API_KEY;
   let [inform, setInform] = useState<placeInforms>();
-  // let [inform, setInform] = useState<placeInforms>();
   let [place, setPlace] = useState('');
   let [placeId, setPlaceId] = useState('');
   let [search, setSearch] = useState(false);
@@ -21,12 +21,10 @@ function Search() {
   
   useEffect(() => {
     if(count === 0) {
-      console.log(count);
       return;
     }
     else {
-      //placeId 가 업뎃이 바로 안됨 placeId 가 바뀌기 전에 다음 request 가 진행되어 업뎃이 안되는거였음
-      axios.get('/maps'+`/api/place/textsearch/json?query=${place}&key=AIzaSyA7uIJhOTUODaL2FW7MBDqQzoG043xKnSk`)
+      axios.get('/maps'+`/api/place/textsearch/json?query=${place}&key=${API_KEY}`)
       .then((res) => { console.log(res.data); setPlaceId(res.data.results[0].place_id); setNoData(true)})
       .catch((err) => {
         setNoData(true);
@@ -37,19 +35,19 @@ function Search() {
   }, [count]);
 
   useEffect(() => {
-    //처음 렌더링
     if(placeId === '') {
       return
     }
     else {
       setNoData(false);
-      axios.get('/maps'+`/api/place/details/json?fields=name%2Ctypes%2Crating%2Cformatted_phone_number%2Cformatted_address%2Cphoto%2Cwebsite%2Creviews%2Cwheelchair_accessible_entrance%2Cgeometry&place_id=${placeId}&key=AIzaSyA7uIJhOTUODaL2FW7MBDqQzoG043xKnSk`)
-      .then((res) => {setSearch(true); console.log(res.data.result.types[0]); setInform(res.data.result)})
+      axios.get('/maps'+`/api/place/details/json?fields=name%2Ctypes%2Crating%2Cformatted_phone_number%2Cformatted_address%2Cphoto%2Cwebsite%2Creviews%2Cwheelchair_accessible_entrance%2Cgeometry&place_id=${placeId}&key=${API_KEY}`)
+      .then((res) => {setSearch(true); setInform(res.data.result)})
       .catch((err) => {
         console.log(err);
       });
     }
   }, [placeId]);
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.searchBar}>
@@ -77,10 +75,10 @@ function Search() {
         <div className={styles.informBox}>
         
         {search === false ?
-        <>
-          <span className={styles.notice}>{noData === true ? <div>NoData</div> : <div>searching...</div>}</span>
-          <img src='/dog.png' className={styles.dogImg}/>
-        </>
+          <>
+            <span className={styles.notice}>{noData === true ? <div>NoData</div> : <div>searching...</div>}</span>
+            <img src='/dog.png' className={styles.dogImg}/>
+          </>
           : 
           <div className={styles.cardBox}
             onClick={()=>{
@@ -88,29 +86,28 @@ function Search() {
               navigate('/detail');
             }}
           >
-              <span className={styles.title}>{inform?.name}</span>
-              <div className={styles.contentBox}>
-                <span className={styles.address}>
-                  <img src='/spot.png' />
-                  {inform?.formatted_address}
-                </span>
-                <span className={styles.website}>
-                  <img src='/website.png' />
-                  {inform?.website}
-                </span>
-                <span className={styles.contact}>
-                  <img src='/contact.png' />
-                  {inform?.formatted_phone_number}
-                </span>
-                
-              </div>
-              <div className={styles.imgWrapper}>
-                {inform?.photos !== undefined ? 
-                <img className={styles.placeImg} src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=500&photo_reference=${inform?.photos[0].photo_reference}&key=AIzaSyA7uIJhOTUODaL2FW7MBDqQzoG043xKnSk`}/>
-                : <img className={styles.dogImg} src={'/dog.png'}/>
-                }
-              </div>
+            <span className={styles.title}>{inform?.name}</span>
+            <div className={styles.contentBox}>
+              <span className={styles.address}>
+                <img src='/spot.png' />
+                {inform?.formatted_address}
+              </span>
+              <span className={styles.website}>
+                <img src='/website.png' />
+                {inform?.website}
+              </span>
+              <span className={styles.contact}>
+                <img src='/contact.png' />
+                {inform?.formatted_phone_number}
+              </span>
+              
             </div>
+            <div className={styles.imgWrapper}>
+              {inform?.photos !== undefined ? <img className={styles.placeImg} src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=500&photo_reference=${inform?.photos[0].photo_reference}&key=${API_KEY}`}/>
+              : <img className={styles.dogImg} src={'/dog.png'}/>
+              }
+            </div>
+          </div>
         } 
         </div>
       </div>

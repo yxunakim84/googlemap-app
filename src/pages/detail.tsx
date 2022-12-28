@@ -1,15 +1,15 @@
-import { useDispatch, useSelector} from "react-redux";
+import { useSelector} from "react-redux";
 import styles from "../styles/Detail.module.css";
 import {Button, ListGroup, ButtonGroup} from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { reviewType, dataType, photosType } from "../Constants/type";
+import { dataType } from "../Constants/type";
 import drawReview from "../Components/Review";
-import drawPhotos from "../Components/Photo";
+import DrawPhotos from "../Components/Photo";
 
 function Detail() {
   let result = useSelector((state?):any => state);
-  console.log(result);
+  // console.log(result);
   let data : dataType = result.data;
   let navigate = useNavigate();
   let [review, setReview] = useState(true);
@@ -44,22 +44,22 @@ function Detail() {
           </Button>
           <div className={styles.detail}>
             <ListGroup className={styles.list} style={{width: '100%'}}>
-              <ListGroup.Item style={{width: '100%'}}>💻 웹사이트</ListGroup.Item>
+              <ListGroup.Item>💻 웹사이트</ListGroup.Item>
               <ListGroup.Item style={{width: '100%'}} id={styles.inform}
                 onClick={()=>{ window.open(`${data.website}`)}}
               >
                 {data.website}
               </ListGroup.Item>
-              <ListGroup.Item style={{width: '100%'}}>📍 주소</ListGroup.Item>
-              <ListGroup.Item style={{width: '100%'}} id={styles.inform}>{data.formatted_address}</ListGroup.Item>
-              <ListGroup.Item style={{width: '100%'}}>📞 연락처</ListGroup.Item>
-              <ListGroup.Item style={{width: '100%'}} id={styles.inform}>{data.formatted_phone_number}</ListGroup.Item>
-              <ListGroup.Item style={{width: '100%'}}>👨‍🦽 배리어프리</ListGroup.Item>
-              <ListGroup.Item style={{width: '100%'}} id={styles.inform}>{data.wheelchair_accessible_entrance === true ? <span>O</span> : <span>X</span>}</ListGroup.Item>
-              <ListGroup.Item style={{width: '100%'}}>💫 평점</ListGroup.Item>
-              <ListGroup.Item style={{width: '100%'}} id={styles.inform}>{data.rating}</ListGroup.Item>
-              <ListGroup.Item style={{width: '100%'}}>🔍 위도 / 경도</ListGroup.Item>
-              <ListGroup.Item style={{width: '100%'}} id={styles.inform}>{data.geometry.location.lat} / {data.geometry.location.lng}</ListGroup.Item>
+              <ListGroup.Item>📍 주소</ListGroup.Item>
+              <ListGroup.Item id={styles.inform}>{data.formatted_address}</ListGroup.Item>
+              <ListGroup.Item>📞 연락처</ListGroup.Item>
+              <ListGroup.Item id={styles.inform}>{data.formatted_phone_number}</ListGroup.Item>
+              <ListGroup.Item>👨‍🦽 배리어프리</ListGroup.Item>
+              <ListGroup.Item id={styles.inform}>{data.wheelchair_accessible_entrance === true ? <span>O</span> : <span>X</span>}</ListGroup.Item>
+              <ListGroup.Item>💫 평점</ListGroup.Item>
+              <ListGroup.Item id={styles.inform}>{data.rating}</ListGroup.Item>
+              <ListGroup.Item>🔍 위도 / 경도</ListGroup.Item>
+              <ListGroup.Item id={styles.inform}>{data.geometry.location.lat} / {data.geometry.location.lng}</ListGroup.Item>
             </ListGroup>
             </div>
           </div>
@@ -75,7 +75,7 @@ function Detail() {
           </ButtonGroup>
           
           {
-            review === true ? drawReview(data) : drawPhotos(data)
+            review === true ? drawReview(data) : DrawPhotos(data)
           }
         </div> 
       }

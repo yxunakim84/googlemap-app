@@ -6,6 +6,7 @@ import Search from '../pages/search';
 import Detail from '../pages/detail';
 import Home from '../pages/home';
 import Edit from '../pages/edit';
+import NotFound from '../pages/notFound';
 
 function ColorSchemesExample() {
   let navigate = useNavigate();
@@ -15,7 +16,9 @@ function ColorSchemesExample() {
         <Container>
           <Navbar.Brand onClick={() => navigate('/')}>Home</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link onClick={() => navigate('/search')}>Search</Nav.Link>
+            <Nav.Link 
+              // className={`${styles.link} ${router.pathname === "/" ? styles.active : "" }`}
+              onClick={() => navigate('/search')}>Search</Nav.Link>
             <Nav.Link onClick={() => navigate('/detail')}>Detail</Nav.Link>
           </Nav>
         </Container>
@@ -26,6 +29,7 @@ function ColorSchemesExample() {
         <Route path='/search' element={<Search />}/>
         <Route path='/detail' element={<Detail />}/>
         <Route path='/edit' element={<Edit />}/>
+        <Route path='/*' element={<NotFound />}/>
       </Routes>
     </>
   );
