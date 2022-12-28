@@ -39,13 +39,12 @@ function Detail() {
   let data : dataType = result.data.data
   console.log(data?.name);
   let navigate = useNavigate();
-  console.log(data?.types[0]);
   return (
     <div className={styles.wrapper}>
       {result.data.data === '' 
       ? 
         <div className={styles.alertContents}>
-          <div>장소 검색을 먼저 해주세요 !</div>
+          <div>장소를 먼저 검색해주세요 !</div>
           <Button 
             className={styles.button}
             variant="outline-secondary" 
