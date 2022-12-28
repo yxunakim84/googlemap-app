@@ -1,13 +1,11 @@
 import { useDispatch, useSelector} from "react-redux";
 import styles from "../styles/Edit.module.css";
-import {Button, ListGroup, Form, InputGroup} from 'react-bootstrap';
+import {Button, ListGroup, Form, InputGroup, Overlay, Alert} from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { reviewType, dataType, photosType } from "../Constants/type";
-import drawReview from "../Components/Review";
-import drawPhotos from "../Components/Photo";
-// import { loadData } from "../store";
-import { loadData, EditName, EditWebsite, EditAddress, EditContact, EditWheelchair, EditRate, EditLocation } from "../store";
+import { useState, useRef } from "react";
+import { dataType } from "../Constants/type";
+import { EditName, EditWebsite, EditAddress, EditContact, EditWheelchair, EditRate, EditLocation } from "../store";
+
 
 function Edit() {
   let result = useSelector((state?):any => state);
@@ -19,10 +17,25 @@ function Edit() {
   let [wheelchair, setWheelchair] = useState(data.wheelchair_accessible_entrance === true ? 'O' : 'X');
   let [rate, setRate] = useState(data.rating.toString());
   let [location, setLocation] = useState([data.geometry.location.lat.toString(), data.geometry.location.lng.toString()]);
+  const [show, setShow] = useState(false);
+  const target = useRef(null);
+
   let dispatch = useDispatch();
 
   return (
     <div className={styles.wrapper}>
+      {
+        show === true ?
+        <div className={styles.alertWrapper}>
+          <Alert show={show} variant="success" className={styles.alert}>
+            <span className={styles.alertText}>수정되었습니다!</span>
+            <Button onClick={() => setShow(false)}>
+              Close
+            </Button>
+        </Alert>
+        </div>
+        : ""
+      }
       <div className={styles.contents}>
         <div className={styles.title}>정보 수정</div>
       <ListGroup className={styles.list} style={{width: '90%'}}>
@@ -32,8 +45,10 @@ function Edit() {
               value={name}
               onChange={(e)=>{setName(e.target.value)}}
               />
+            
             <Button
-              onClick={()=>{dispatch(EditName(name))}}
+              ref={target}
+              onClick={()=>{dispatch(EditName(name)); setShow(true);}}
               variant="outline-secondary" id="button-addon2">
               edit
             </Button>
@@ -46,7 +61,7 @@ function Edit() {
               onChange={(e)=>{setWebsite(e.target.value)}}
               />
             <Button
-              onClick={()=>{dispatch(EditWebsite(website))}}
+              onClick={()=>{dispatch(EditWebsite(website)); setShow(true);}}
               variant="outline-secondary" id="button-addon2">
               edit
             </Button>
@@ -59,7 +74,7 @@ function Edit() {
               onChange={(e)=>{setAddress(e.target.value)}}
               />
             <Button 
-              onClick={()=>{dispatch(EditAddress(address))}}
+              onClick={()=>{dispatch(EditAddress(address)); setShow(true);}}
               variant="outline-secondary" id="button-addon2">
               edit
             </Button>
@@ -72,7 +87,7 @@ function Edit() {
               onChange={(e)=>{setContact(e.target.value)}}
               />
             <Button
-              onClick={()=>{dispatch(EditContact(contact))}}
+              onClick={()=>{dispatch(EditContact(contact)); setShow(true);}}
               variant="outline-secondary" id="button-addon2">
               edit
             </Button>
@@ -85,7 +100,7 @@ function Edit() {
               onChange={(e)=>{setWheelchair(e.target.value)}}
               />
             <Button
-              onClick={()=>{wheelchair === 'O' ? dispatch(EditWheelchair(true)) : dispatch(EditWheelchair(false))}}
+              onClick={()=>{wheelchair === 'O' ? dispatch(EditWheelchair(true)) : dispatch(EditWheelchair(false)); setShow(true);}}
               variant="outline-secondary" id="button-addon2">
               edit
             </Button>
@@ -98,7 +113,7 @@ function Edit() {
               onChange={(e)=>{setRate(e.target.value)}}
               />
             <Button
-              onClick={()=>{dispatch(EditRate(Number(rate)))}}
+              onClick={()=>{dispatch(EditRate(Number(rate))); setShow(true);}}
               variant="outline-secondary" id="button-addon2">
               edit
             </Button>
@@ -109,10 +124,10 @@ function Edit() {
             <Form.Control
               style={{borderBottomLeftRadius: '0.375rem'}}
               value={`${location[0]} / ${location[1]}`}
-              onChange={(e)=>{setLocation(getLocation(e.target.value))}}
+              onChange={(e)=>{setLocation(getLocation(e.target.value)); setShow(true);}}
               />
             <Button 
-              onClick={()=>{dispatch(EditLocation([Number(location[0]), Number(location[1])]))}}
+              onClick={()=>{dispatch(EditLocation([Number(location[0]), Number(location[1])])); setShow(true);}}
               style={{borderBottomRightRadius: '0.375rem'}}
               variant="outline-secondary" id="button-addon2">
               edit
@@ -123,6 +138,7 @@ function Edit() {
     </div>
   )
 }
+
 
 function getLocation(location : string) : string[] {
   const result = location.split('/');
