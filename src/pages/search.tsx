@@ -146,8 +146,6 @@ function Search() {
                 <img className={styles.placeImg} src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=500&photo_reference=${inform?.photos[0].photo_reference}&key=AIzaSyA7uIJhOTUODaL2FW7MBDqQzoG043xKnSk`}/>
                 : <img className={styles.dogImg} src={'/dog.png'}/>
                 }
-                {/* <img className={styles.placeImg} src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=500&photo_reference=${inform?.photos[0].photo_reference}&key=AIzaSyA7uIJhOTUODaL2FW7MBDqQzoG043xKnSk`}/> */}
-                {/* <img className={styles.placeImg} src={'/dog.png'}/> */}
               </div>
             </div>
         } 
