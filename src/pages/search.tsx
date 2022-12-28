@@ -58,17 +58,6 @@ function Search() {
       });
       
     }
-      
-      // axios.get('/maps'+`/api/place/details/json?fields=name%2Crating%2Cformatted_phone_number%2Cformatted_address%2Cphoto%2Cwebsite%2Creviews&place_id=${placeId}&key=AIzaSyA7uIJhOTUODaL2FW7MBDqQzoG043xKnSk`)
-      // .then((res) => {console.log(res.data.result.photos); setInform(res.data.result)})
-      // .catch((err) => {
-      //   console.log(err);
-      // });
-      
-    
-      // axios.get('/maps'+`/api/place/photo?maxwidth=400&photo_reference=${inform?.photos[0].photo_reference}&key=AIzaSyA7uIJhOTUODaL2FW7MBDqQzoG043xKnSk`)
-      // .then((res) => {console.log(res)})
-      // console.log(inform);
   }, [count]);
 
   useEffect(() => {

@@ -16,18 +16,33 @@ interface dataType {
 interface photosType {
   photo_reference: string,
 }
+const initialState : dataType = {
+  name: '',
+  reviews: [],
+  photos: [],
+  formatted_address: "",
+  formatted_phone_number: "",
+  website: "",
+  rating: 0,
+  geometry: [],
+  wheelchair_accessible_entrance: "",
+  current_opening_hours: 0,
+};
 
 let data = createSlice({
   name: 'result',
-  // initialState: {
-  //   data: ''
-  // },
-  initialState: {data: ""},
+  // initialState: {data: ""},
+  initialState,
   reducers : {
     loadData(state, data) {
-      state.data = data.payload
-      console.log('들어온 데이터', state.data);
+       return data.payload;
+      // state.data = data.payload;
+      // state.data.name = '내맘대로';
+      // console.log('들어온 데이터', state.data);
     },
+    EditData(state, input) {
+      
+    }
   }
 })
 

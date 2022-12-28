@@ -10,9 +10,8 @@ import drawPhotos from "../Components/Photo";
 function Detail() {
   let result = useSelector((state?):any => state);
   // console.log(result);
-  // console.log('result', result.data.data);
-  let data : dataType = result.data.data;
-  // console.log(data?.photos);
+  console.log('result', result.data);
+  let data : dataType = result.data;
   let navigate = useNavigate();
   let [review, setReview] = useState(true);
   let [photo, setPhoto] = useState(false);
