@@ -103,5 +103,22 @@
 }
 
 .text {
-  font-size: 15px;
+  font-size: 13px;
+}
+
+.alertContents {
+  height: 100vh;
+  padding: 5rem;
+  padding-top: 7rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  overflow-y: auto;
+}
+.alertContents div {
+  width: 100%;
+}
+
+.dog2 {
+  margin-top: 3rem;
 }

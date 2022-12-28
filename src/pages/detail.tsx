@@ -1,6 +1,7 @@
 import { useDispatch, useSelector} from "react-redux";
 import styles from "../styles/Detail.module.css";
 import {Button, ListGroup} from 'react-bootstrap';
+import { useNavigate } from "react-router-dom";
 
 interface reviewType {
   author_name: string,
@@ -11,7 +12,7 @@ interface reviewType {
 }
 interface dataType {
   name: string,
-  reviews: string[],
+  reviews: reviewType[],
   photos: photosType[],
   formatted_address: string,
   formatted_phone_number: string,
@@ -34,10 +35,25 @@ function Detail() {
   let result = useSelector((state?):any => state);
   console.log(result);
   console.log('result', result.data.data);
-  let data = result.data.data
-  console.log(data.name);
+  let data : dataType = result.data.data
+  console.log(data?.name);
+  let navigate = useNavigate();
   return (
     <div className={styles.wrapper}>
+      {result.data.data === '' 
+      ? 
+        <div className={styles.alertContents}>
+          <div>장소 검색을 먼저 해주세요 !</div>
+          <Button 
+            className={styles.button}
+            variant="outline-secondary" 
+            onClick={() => navigate('/search')}>
+              장소검색하러 가기
+          </Button>
+          <img className={styles.dog2} src="/dog2.png" />
+        </div>
+      :
+      
        <div className={styles.contents}>
         <span className={styles.name}>{data.name}</span>
         <hr />
@@ -66,7 +82,7 @@ function Detail() {
         </div>
         
         <div className={styles.reviewWrapper}>
-          {data.reviews.map((reivew: reviewType)=>(
+          {data.reviews?.map((reivew: reviewType)=>(
             
             <div className={styles.reviews}>
               <div className={styles.profile}>
@@ -85,6 +101,7 @@ function Detail() {
         </div>
         <div style={{height: '2rem'}}></div>
       </div> 
+  }
     </div>
   )
 

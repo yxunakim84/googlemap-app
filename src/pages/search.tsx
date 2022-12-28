@@ -9,12 +9,12 @@ import { useNavigate } from 'react-router-dom';
 
 interface placeInforms {
   name: string,
-  reviews: string[],
-  photos: photosType[],
+  reviews?: string[],
+  photos?: photosType[],
   formatted_address: string,
   formatted_phone_number: string,
-  website: string,
-  rating: number,
+  website?: string,
+  rating?: number,
   geometry: {
     location: {
       lat: number,
@@ -23,18 +23,6 @@ interface placeInforms {
   },
   wheelchair_accessible_entrance?: boolean,
   
-}
-interface dataType {
-  name: string,
-  reviews: string[],
-  photos: photosType[],
-  formatted_address: string,
-  formatted_phone_number: string,
-  website: string,
-  rating: number,
-  geometry: string[],
-  wheelchair_accessible_entrance: string,
-  current_opening_hours: number,
 }
 
 interface photosType {
@@ -48,7 +36,7 @@ function Search() {
   let [placeId, setPlaceId] = useState('');
   let [search, setSearch] = useState(false);
   let [count, setCount] = useState(0);
-  let [data, setData] = useState<dataType[]>();
+  let [noData, setNoData] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();     
   
@@ -59,9 +47,12 @@ function Search() {
     else {
       //placeId 가 업뎃이 바로 안됨 placeId 가 바뀌기 전에 다음 request 가 진행되어 업뎃이 안되는거였음
       axios.get('/maps'+`/api/place/textsearch/json?query=${place}&key=AIzaSyA7uIJhOTUODaL2FW7MBDqQzoG043xKnSk`)
-      .then((res) => { setPlaceId(res.data.results[0].place_id);})
-      .catch(() => {
-        console.log('실패');
+      .then((res) => { setPlaceId(res.data.results[0].place_id); setNoData(true)})
+      .catch((err) => {
+        setNoData(true);
+        setSearch(false);
+        console.log('placeId는!!!??..', placeId)
+        console.log(err);
       });
       
     }
@@ -79,13 +70,13 @@ function Search() {
   }, [count]);
 
   useEffect(() => {
+    //처음 렌더링
     if(placeId === '') {
       return
     }
     else {
+      setNoData(false);
       setSearch(false);
-      console.log('search', search);
-      console.log('data 가져오는 중');
       axios.get('/maps'+`/api/place/details/json?fields=name%2Crating%2Cformatted_phone_number%2Cformatted_address%2Cphoto%2Cwebsite%2Creviews%2Cwheelchair_accessible_entrance%2Cgeometry&place_id=${placeId}&key=AIzaSyA7uIJhOTUODaL2FW7MBDqQzoG043xKnSk`)
       .then((res) => {setSearch(true); console.log(res.data.result); setInform(res.data.result)})
       .catch((err) => {
@@ -93,7 +84,6 @@ function Search() {
       });
     }
   }, [placeId]);
-
   return (
     <div className={styles.wrapper}>
       <div className={styles.searchBar}>
@@ -121,9 +111,10 @@ function Search() {
       
       <div className={styles.result}>
         <div className={styles.informBox}>
+        
         {search === false ?
         <>
-          <span className={styles.notice}>searching...</span>
+          <span className={styles.notice}>{noData === true ? <div>NoData</div> : <div>searching...</div>}</span>
           <img src='/dog.png' className={styles.dogImg}/>
         </>
           : 
@@ -134,28 +125,27 @@ function Search() {
             }}
           >
               <span className={styles.title}>{inform?.name}</span>
-              {/* <div className={styles.item}> */}
               <div className={styles.contentBox}>
                 <span className={styles.address}>
                   <img src='/spot.png' />
                   {inform?.formatted_address}
                 </span>
-              {/* </div> */}
-              {/* <div className={styles.item}> */}
                 <span className={styles.website}>
                   <img src='/website.png' />
                   {inform?.website}
                 </span>
-                {/* </div>
-                <div className={styles.item}> */}
                 <span className={styles.contact}>
                   <img src='/contact.png' />
                   {inform?.formatted_phone_number}
                 </span>
-                {/* </div> */}
+                
               </div>
               <div className={styles.imgWrapper}>
+                {inform?.photos !== undefined ? 
                 <img className={styles.placeImg} src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=500&photo_reference=${inform?.photos[0].photo_reference}&key=AIzaSyA7uIJhOTUODaL2FW7MBDqQzoG043xKnSk`}/>
+                : <img className={styles.dogImg} src={'/dog.png'}/>
+                }
+                {/* <img className={styles.placeImg} src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=500&photo_reference=${inform?.photos[0].photo_reference}&key=AIzaSyA7uIJhOTUODaL2FW7MBDqQzoG043xKnSk`}/> */}
                 {/* <img className={styles.placeImg} src={'/dog.png'}/> */}
               </div>
             </div>
