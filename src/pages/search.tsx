@@ -3,6 +3,9 @@ import React, {useCallback, useMemo, useState} from 'react';
 import {Button, Form, InputGroup, Container, Nav} from 'react-bootstrap';
 import axios from 'axios';
 import { useRef, useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { loadData } from '../store';
+import { useNavigate } from 'react-router-dom';
 
 interface placeInforms {
   name: string,
@@ -12,6 +15,26 @@ interface placeInforms {
   formatted_phone_number: string,
   website: string,
   rating: number,
+  geometry: {
+    location: {
+      lat: number,
+      lng: number,
+    }
+  },
+  wheelchair_accessible_entrance?: boolean,
+  
+}
+interface dataType {
+  name: string,
+  reviews: string[],
+  photos: photosType[],
+  formatted_address: string,
+  formatted_phone_number: string,
+  website: string,
+  rating: number,
+  geometry: string[],
+  wheelchair_accessible_entrance: string,
+  current_opening_hours: number,
 }
 
 interface photosType {
@@ -25,7 +48,9 @@ function Search() {
   let [placeId, setPlaceId] = useState('');
   let [search, setSearch] = useState(false);
   let [count, setCount] = useState(0);
-
+  let [data, setData] = useState<dataType[]>();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();     
   // const fetchData = () => {
   //   console.log('clicked');
   //   // setPlace(''); setInform(undefined);
@@ -44,13 +69,9 @@ function Search() {
 
     
   useEffect(() => {
-      console.log('렌더');
-      console.log(place);
-      console.log(placeId);
-      
       //placeId 가 업뎃이 바로 안됨 placeId 가 바뀌기 전에 다음 request 가 진행되어 업뎃이 안되는거였음
       axios.get('/maps'+`/api/place/textsearch/json?query=${place}&key=AIzaSyA7uIJhOTUODaL2FW7MBDqQzoG043xKnSk`)
-      .then((res) => {setPlaceId(res.data.results[0].place_id);})
+      .then((res) => { setPlaceId(res.data.results[0].place_id);})
       .catch(() => {
         console.log('실패');
       });
@@ -69,8 +90,8 @@ function Search() {
   }, [count]);
 
   useEffect(() => {
-    axios.get('/maps'+`/api/place/details/json?fields=name%2Crating%2Cformatted_phone_number%2Cformatted_address%2Cphoto%2Cwebsite%2Creviews&place_id=${placeId}&key=AIzaSyA7uIJhOTUODaL2FW7MBDqQzoG043xKnSk`)
-    .then((res) => {console.log(res.data.result.photos); setInform(res.data.result)})
+    axios.get('/maps'+`/api/place/details/json?fields=name%2Crating%2Cformatted_phone_number%2Cformatted_address%2Cphoto%2Cwebsite%2Creviews%2Cwheelchair_accessible_entrance%2Cgeometry&place_id=${placeId}&key=AIzaSyA7uIJhOTUODaL2FW7MBDqQzoG043xKnSk`)
+    .then((res) => {console.log(res.data.result); setInform(res.data.result)})
     .catch((err) => {
       console.log(err);
     });
@@ -82,7 +103,7 @@ function Search() {
         <InputGroup className={styles.input}>
         <Form.Control
           // onClick={() => {setSearch(false)}}
-          onChange={(e) => {setPlace(e.target.value); console.log(place, e.target.value)}}
+          onChange={(e) => {setPlace(e.target.value)}}
           placeholder="공간을 검색해주세요 !"
           aria-label="Recipient's username"
           aria-describedby="basic-addon2"
@@ -92,7 +113,7 @@ function Search() {
           className={styles.button}
           onClick={() => {
             setSearch(true);
-            setCount((prev) => (prev+1))
+            setCount((prev) => (prev+1));
             // setCount((prev)=>(prev+1)); console.log(place) 
           }}
         >
@@ -100,6 +121,7 @@ function Search() {
         </Button>
         </InputGroup>
       </div>
+      
       <div className={styles.result}>
         <div className={styles.informBox}>
         {search === false ?
@@ -108,7 +130,12 @@ function Search() {
           <img src='/dog.png' className={styles.dogImg}/>
         </>
           : 
-          <div className={styles.cardBox}>
+          <div className={styles.cardBox}
+            onClick={()=>{
+              dispatch(loadData(inform));
+              navigate('/detail');
+            }}
+          >
               <span className={styles.title}>{inform?.name}</span>
               {/* <div className={styles.item}> */}
               <div className={styles.contentBox}>
