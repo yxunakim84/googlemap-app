@@ -6,29 +6,7 @@ import { useRef, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { loadData } from '../store';
 import { useNavigate } from 'react-router-dom';
-
-interface placeInforms {
-  name: string,
-  reviews?: string[],
-  photos?: photosType[],
-  formatted_address: string,
-  formatted_phone_number: string,
-  website?: string,
-  rating?: number,
-  geometry: {
-    location: {
-      lat: number,
-      lng: number,
-    }
-  },
-  types: string[],
-  wheelchair_accessible_entrance?: boolean,
-  
-}
-
-interface photosType {
-  photo_reference: string,
-}
+import { placeInforms } from '../Constants/type';
 
 function Search() {
   let [inform, setInform] = useState<placeInforms>();
@@ -53,8 +31,6 @@ function Search() {
       .catch((err) => {
         setNoData(true);
         setSearch(false);
-        console.log('placeId는!!!??..', placeId)
-        console.log(err);
       });
       
     }
@@ -79,7 +55,6 @@ function Search() {
       <div className={styles.searchBar}>
         <InputGroup className={styles.input}>
         <Form.Control
-          // onClick={() => {setSearch(false)}}
           onChange={(e) => {setPlace(e.target.value)}}
           placeholder="공간을 검색해주세요 !"
           aria-label="Recipient's username"
@@ -91,7 +66,6 @@ function Search() {
           onClick={() => {
             setSearch(false);
             setCount((prev) => (prev+1));
-            // setCount((prev)=>(prev+1)); console.log(place) 
           }}
         >
           <img src='/search.png' className={styles.searchImg} />

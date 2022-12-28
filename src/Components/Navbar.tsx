@@ -5,6 +5,7 @@ import { useNavigate, Route, Routes } from 'react-router-dom';
 import Search from '../pages/search';
 import Detail from '../pages/detail';
 import Home from '../pages/home';
+import Edit from '../pages/edit';
 
 function ColorSchemesExample() {
   let navigate = useNavigate();
@@ -16,7 +17,6 @@ function ColorSchemesExample() {
           <Nav className="me-auto">
             <Nav.Link onClick={() => navigate('/search')}>Search</Nav.Link>
             <Nav.Link onClick={() => navigate('/detail')}>Detail</Nav.Link>
-            {/* <Nav.Link href="#pricing">Pricing</Nav.Link> */}
           </Nav>
         </Container>
       </Navbar>
@@ -25,18 +25,8 @@ function ColorSchemesExample() {
         <Route path='/' element={<Home />}/>
         <Route path='/search' element={<Search />}/>
         <Route path='/detail' element={<Detail />}/>
+        <Route path='/edit' element={<Edit />}/>
       </Routes>
-      {/* <br />
-      <Navbar bg="light" variant="light">
-        <Container>
-          <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
-          </Nav>
-        </Container>
-      </Navbar> */}
     </>
   );
 }

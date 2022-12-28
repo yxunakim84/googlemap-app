@@ -9,15 +9,14 @@ import drawPhotos from "../Components/Photo";
 
 function Detail() {
   let result = useSelector((state?):any => state);
-  // console.log(result);
-  console.log('result', result.data);
+  console.log(result);
   let data : dataType = result.data;
   let navigate = useNavigate();
   let [review, setReview] = useState(true);
   let [photo, setPhoto] = useState(false);
   return (
     <div className={styles.wrapper}>
-      {result.data.data === '' 
+      {data.name === ''
       ? 
         <div className={styles.alertContents}>
           <div>장소를 먼저 검색해주세요 !</div>
@@ -31,12 +30,14 @@ function Detail() {
         </div>
       :
         <div className={styles.contents}>
-          <span className={styles.name}>{data.name}
+          <span className={styles.name}
+          >{data.name}
           </span>
           <div className={styles.type}>{data.types[0]}</div>
           <hr />
           <div className={styles.detailWrapper}>
           <Button
+            onClick={()=>{navigate('/edit')}}
             className={styles.button}
             variant="outline-secondary">
             정보수정
