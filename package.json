@@ -1,5 +1,6 @@
 {
   "proxy": "https://maps.googleapis.com",
+  "homepage": "http://googleapis-map.com/kyn",
   "name": "googlemap-app",
   "version": "0.1.0",
   "private": true,
