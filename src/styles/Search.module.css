@@ -2,7 +2,6 @@
   background-color:rgb(253, 247, 240);
   height: 100vh;
   position: relative;
-  /* overflow-y: auto; */
 }
 .searchBar {
   justify-content: center;
@@ -43,7 +42,6 @@
   animation: fadeIn 1.5s ease-in-out;
   
 }
-
 .informBox {
   height: 100%;
   display: flex;

@@ -1,26 +1,6 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit'
+import { dataType } from './Constants/type';
 
-interface dataType {
-  name: string,
-  reviews: string[],
-  photos: photosType[],
-  formatted_address: string,
-  formatted_phone_number: string,
-  website: string,
-  rating: number,
-  geometry: {
-    location: {
-      lat: number,
-      lng: number,
-    }
-  },
-  wheelchair_accessible_entrance: boolean,
-  current_opening_hours: number,
-}
-
-interface photosType {
-  photo_reference: string,
-}
 const initialState : dataType = {
   name: '',
   reviews: [],
@@ -35,8 +15,8 @@ const initialState : dataType = {
       lng: 0,
     }
   },
+  types: [],
   wheelchair_accessible_entrance: false,
-  current_opening_hours: 0,
 };
 
 let data = createSlice({

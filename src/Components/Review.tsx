@@ -4,9 +4,9 @@ import { dataType, reviewType } from "../Constants/type";
 function DrawReview(data : dataType) {
   return (
     <div className={styles.reviewWrapper}>
-      {data.reviews?.map((reivew: reviewType)=>(
+      {data.reviews?.map((reivew: reviewType, i)=>(
         
-        <div className={styles.reviews}>
+        <div key={i} className={styles.reviews}>
           <div className={styles.profile}>
             <img className={styles.profilePhoto} src={reivew.profile_photo_url} />
             <div style={{width: '100%'}} className={styles.author}>{reivew.author_name}</div>

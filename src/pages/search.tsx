@@ -1,21 +1,21 @@
 import styles from '../styles/Search.module.css';
-import React, {useCallback, useMemo, useState} from 'react';
+import {useState} from 'react';
 import {Button, Form, InputGroup, Container, Nav} from 'react-bootstrap';
 import axios from 'axios';
-import { useRef, useEffect } from "react";
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from "react";
+import { useDispatch } from 'react-redux';
 import { loadData } from '../store';
 import { useNavigate } from 'react-router-dom';
 import { placeInforms } from '../Constants/type';
 
 function Search() {
   const API_KEY = process.env.REACT_APP_API_KEY;
-  let [inform, setInform] = useState<placeInforms>();
-  let [place, setPlace] = useState('');
-  let [placeId, setPlaceId] = useState('');
-  let [search, setSearch] = useState(false);
-  let [count, setCount] = useState(0);
-  let [noData, setNoData] = useState(false);
+  const [inform, setInform] = useState<placeInforms>();
+  const [place, setPlace] = useState('');
+  const [placeId, setPlaceId] = useState('');
+  const [search, setSearch] = useState(false);
+  const [count, setCount] = useState(0);
+  const [noData, setNoData] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();     
   
@@ -25,7 +25,7 @@ function Search() {
     }
     else {
       axios.get('/maps'+`/api/place/textsearch/json?query=${place}&key=${API_KEY}`)
-      .then((res) => { console.log(res.data); setPlaceId(res.data.results[0].place_id); setNoData(true)})
+      .then((res) => { setPlaceId(res.data.results[0].place_id); setNoData(true)})
       .catch((err) => {
         setNoData(true);
         setSearch(false);
@@ -47,6 +47,7 @@ function Search() {
       });
     }
   }, [placeId]);
+
 
   return (
     <div className={styles.wrapper}>
