@@ -25,7 +25,7 @@ function Search() {
       return;
     }
     else {
-      axios.get('/maps'+`/api/place/textsearch/json?query=${place}&key=${API_KEY}`)
+      axios.get(`/maps/api/place/textsearch/json?query=${place}&key=${API_KEY}`)
       // axios.get(`https://maps.googleapis.com/maps/api/place/details/json?fields=/json?query=${place}&key=${API_KEY}`)
       .then((res) => { console.log(place, res.data.result); setPlaceId(res.data.results[0].place_id); setNext((prev)=>(prev+1))})
       .catch((err) => {
