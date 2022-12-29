@@ -1,6 +1,6 @@
 {
   "proxy": "https://maps.googleapis.com",
-  "homepage": "http://yxunakim84.github.io/",
+  "homepage": "http://yxunakim84.github.io/googleapis",
   "name": "googlemap-app",
   "version": "0.1.0",
   "private": true,
