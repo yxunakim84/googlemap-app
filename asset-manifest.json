@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "https://yxunakim84.github.io/googlemap-app/static/css/main.62ce5ddf.css",
-    "main.js": "https://yxunakim84.github.io/googlemap-app/static/js/main.88b51685.js",
-    "static/js/787.b9d7358e.chunk.js": "https://yxunakim84.github.io/googlemap-app/static/js/787.b9d7358e.chunk.js",
-    "index.html": "https://yxunakim84.github.io/googlemap-app/index.html",
-    "main.62ce5ddf.css.map": "https://yxunakim84.github.io/googlemap-app/static/css/main.62ce5ddf.css.map",
-    "main.88b51685.js.map": "https://yxunakim84.github.io/googlemap-app/static/js/main.88b51685.js.map",
-    "787.b9d7358e.chunk.js.map": "https://yxunakim84.github.io/googlemap-app/static/js/787.b9d7358e.chunk.js.map"
+    "main.css": "/googlemap-app/static/css/main.62ce5ddf.css",
+    "main.js": "/googlemap-app/static/js/main.1b4ec5f9.js",
+    "static/js/787.b9d7358e.chunk.js": "/googlemap-app/static/js/787.b9d7358e.chunk.js",
+    "index.html": "/googlemap-app/index.html",
+    "main.62ce5ddf.css.map": "/googlemap-app/static/css/main.62ce5ddf.css.map",
+    "main.1b4ec5f9.js.map": "/googlemap-app/static/js/main.1b4ec5f9.js.map",
+    "787.b9d7358e.chunk.js.map": "/googlemap-app/static/js/787.b9d7358e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.62ce5ddf.css",
-    "static/js/main.88b51685.js"
+    "static/js/main.1b4ec5f9.js"
   ]
 }
