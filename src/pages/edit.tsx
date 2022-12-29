@@ -44,7 +44,7 @@ function Edit() {
           <InputGroup>
             <Form.Control
               value={name}
-              onChange={(e)=>{setName(e.target.value)}}
+              onChange={(e:any)=>{setName(e.target.value)}}
               />
             
             <Button
@@ -59,7 +59,7 @@ function Edit() {
           <InputGroup>
             <Form.Control
               value={website}
-              onChange={(e)=>{setWebsite(e.target.value)}}
+              onChange={(e:any)=>{setWebsite(e.target.value)}}
               />
             <Button
               onClick={()=>{dispatch(EditWebsite(website)); setShow(true);}}
@@ -72,7 +72,7 @@ function Edit() {
           <InputGroup>
             <Form.Control
               value={address}
-              onChange={(e)=>{setAddress(e.target.value)}}
+              onChange={(e:any)=>{setAddress(e.target.value)}}
               />
             <Button 
               onClick={()=>{dispatch(EditAddress(address)); setShow(true);}}
@@ -85,7 +85,7 @@ function Edit() {
           <InputGroup>
             <Form.Control
               value={contact}
-              onChange={(e)=>{setContact(e.target.value)}}
+              onChange={(e:any)=>{setContact(e.target.value)}}
               />
             <Button
               onClick={()=>{dispatch(EditContact(contact)); setShow(true);}}
@@ -98,7 +98,7 @@ function Edit() {
           <InputGroup>
             <Form.Control
               value={wheelchair}
-              onChange={(e)=>{setWheelchair(e.target.value)}}
+              onChange={(e:any)=>{setWheelchair(e.target.value)}}
               />
             <Button
               onClick={()=>{wheelchair === 'O' ? dispatch(EditWheelchair(true)) : dispatch(EditWheelchair(false)); setShow(true);}}
@@ -111,7 +111,7 @@ function Edit() {
           <InputGroup>
             <Form.Control
               value={rate}
-              onChange={(e)=>{setRate(e.target.value)}}
+              onChange={(e:any)=>{setRate(e.target.value)}}
               />
             <Button
               onClick={()=>{dispatch(EditRate(Number(rate))); setShow(true);}}
@@ -125,7 +125,7 @@ function Edit() {
             <Form.Control
               style={{borderBottomLeftRadius: '0.375rem'}}
               value={`${location[0]} / ${location[1]}`}
-              onChange={(e)=>{setLocation(getLocation(e.target.value)); setShow(true);}}
+              onChange={(e:any)=>{setLocation(getLocation(e.target.value)); setShow(true);}}
               />
             <Button 
               onClick={()=>{dispatch(EditLocation([Number(location[0]), Number(location[1])])); setShow(true);}}

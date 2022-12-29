@@ -26,7 +26,7 @@ function Detail() {
             onClick={() => navigate('/search')}>
               장소검색하러 가기
           </Button>
-          <img className={styles.dog2} src="/dog2.png" />
+          <img className={styles.dog2} src={`${process.env.PUBLIC_URL}/dog2.png`} />
         </div>
       :
         <div className={styles.contents}>

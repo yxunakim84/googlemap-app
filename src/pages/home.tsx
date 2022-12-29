@@ -7,10 +7,10 @@ function Home() {
   return (
     <div className={styles.content}>
         <div className={styles.wrapper}>
-          <img className={styles.circleimg} src='/circle.png' />      
+          <img className={styles.circleimg} src={`${process.env.PUBLIC_URL}/circle.png`} />      
           <span className={styles.text1}>나만의 공간을 찾아서,</span>
           <span className={styles.text2}>Search Place</span>
-          <img className={styles.bgimg} src='/image.png'></img>
+          <img className={styles.bgimg} src={`${process.env.PUBLIC_URL}/image.png`}></img>
         </div>
     </div>
   )

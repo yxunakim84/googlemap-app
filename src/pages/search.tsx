@@ -54,7 +54,7 @@ function Search() {
       <div className={styles.searchBar}>
         <InputGroup className={styles.input}>
         <Form.Control
-          onChange={(e) => {setPlace(e.target.value)}}
+          onChange={(e:any) => {setPlace(e.target.value)}}
           placeholder="공간을 검색해주세요 !"
           aria-label="Recipient's username"
           aria-describedby="basic-addon2"
@@ -67,7 +67,7 @@ function Search() {
             setCount((prev) => (prev+1));
           }}
         >
-          <img src='/search.png' className={styles.searchImg} />
+          <img src={`${process.env.PUBLIC_URL}/search.png`} className={styles.searchImg} />
         </Button>
         </InputGroup>
       </div>
@@ -78,7 +78,7 @@ function Search() {
         {search === false ?
           <>
             <span className={styles.notice}>{noData === true ? <div>NoData</div> : <div>searching...</div>}</span>
-            <img src='/dog.png' className={styles.dogImg}/>
+            <img src={`${process.env.PUBLIC_URL}/dog.png`}className={styles.dogImg}/>
           </>
           : 
           <div className={styles.cardBox}
@@ -90,22 +90,22 @@ function Search() {
             <span className={styles.title}>{inform?.name}</span>
             <div className={styles.contentBox}>
               <span className={styles.address}>
-                <img src='/spot.png' />
+                <img src={`${process.env.PUBLIC_URL}/spot.png`} />
                 {inform?.formatted_address}
               </span>
               <span className={styles.website}>
-                <img src='/website.png' />
+                <img src={`${process.env.PUBLIC_URL}/website.png`} />
                 {inform?.website}
               </span>
               <span className={styles.contact}>
-                <img src='/contact.png' />
+                <img src={`${process.env.PUBLIC_URL}/contact.png` }/>
                 {inform?.formatted_phone_number}
               </span>
               
             </div>
             <div className={styles.imgWrapper}>
               {inform?.photos !== undefined ? <img className={styles.placeImg} src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=500&photo_reference=${inform?.photos[0].photo_reference}&key=${API_KEY}`}/>
-              : <img className={styles.dogImg} src={'/dog.png'}/>
+              : <img className={styles.dogImg} src={`${process.env.PUBLIC_URL}/dog.png`}/>
               }
             </div>
           </div>
