@@ -6,7 +6,7 @@ module.exports = function(app){
       target: 'https://maps.googleapis.com',
       changeOrigin: true,
       ws: true,
-      // pathRewrite: { '^/maps': '/maps'}
+      // pathRewrite: { '^/googleapis': ''}
     })
   )
 }
