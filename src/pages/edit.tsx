@@ -38,7 +38,7 @@ function Edit() {
       }
       <div className={styles.contents}>
           <div className={styles.title}>정보 수정</div>
-          <img className={styles.back} src="/back.png" onClick={()=>{navigate('/detail')}}/>      
+          <img className={styles.back} src={`${process.env.PUBLIC_URL}/back.png`} onClick={()=>{navigate('/detail')}}/>      
       <ListGroup className={styles.list} style={{width: '90%'}}>
           <ListGroup.Item>📌 이름</ListGroup.Item>
           <InputGroup>

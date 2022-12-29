@@ -25,7 +25,7 @@ function Search() {
     }
     else {
       axios.get('/maps'+`/api/place/textsearch/json?query=${place}&key=${API_KEY}`)
-      .then((res) => { setPlaceId(res.data.results[0].place_id); setNoData(true)})
+      .then((res) => { console.log(res.data.result); setPlaceId(res.data.results[0].place_id); setNoData(true)})
       .catch((err) => {
         console.log(err);
         setNoData(true);
@@ -44,6 +44,7 @@ function Search() {
       axios.get('/maps'+`/api/place/details/json?fields=name%2Ctypes%2Crating%2Cformatted_phone_number%2Cformatted_address%2Cphoto%2Cwebsite%2Creviews%2Cwheelchair_accessible_entrance%2Cgeometry&place_id=${placeId}&key=${API_KEY}`)
       .then((res) => {setSearch(true); setInform(res.data.result)})
       .catch((err) => {
+        console.log('에러');
         console.log(err);
       });
     }
@@ -55,7 +56,7 @@ function Search() {
       <div className={styles.searchBar}>
         <InputGroup className={styles.input}>
         <Form.Control
-          onChange={(e:any) => {setPlace(e.target.value)}}
+          onChange={(e : any) => {setPlace(e.target.value)}}
           placeholder="공간을 검색해주세요 !"
           aria-label="Recipient's username"
           aria-describedby="basic-addon2"
