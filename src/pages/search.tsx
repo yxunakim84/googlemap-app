@@ -1,6 +1,6 @@
 import styles from '../styles/Search.module.css';
 import {useState} from 'react';
-import {Button, Form, InputGroup, Container, Nav} from 'react-bootstrap';
+import {Button, Form, InputGroup} from 'react-bootstrap';
 import axios from 'axios';
 import { useEffect } from "react";
 import { useDispatch } from 'react-redux';
@@ -17,7 +17,8 @@ function Search() {
   const [count, setCount] = useState(0);
   const [noData, setNoData] = useState(false);
   const dispatch = useDispatch();
-  const navigate = useNavigate();     
+  const navigate = useNavigate();
+  const [next, setNext] = useState(0);
   
   useEffect(() => {
     if(count === 0) {
@@ -26,7 +27,7 @@ function Search() {
     else {
       axios.get('/maps'+`/api/place/textsearch/json?query=${place}&key=${API_KEY}`)
       // axios.get(`https://maps.googleapis.com/maps/api/place/details/json?fields=/json?query=${place}&key=${API_KEY}`)
-      .then((res) => { console.log(res.data.result); setPlaceId(res.data.results[0].place_id); setNoData(true)})
+      .then((res) => { console.log(place, res.data.result); setPlaceId(res.data.results[0].place_id); setNext((prev)=>(prev+1))})
       .catch((err) => {
         console.log(err);
         setNoData(true);
@@ -46,11 +47,12 @@ function Search() {
       // axios.get(`https://maps.googleapis.com/maps/api/place/details/json?fields=name%2Ctypes%2Crating%2Cformatted_phone_number%2Cformatted_address%2Cphoto%2Cwebsite%2Creviews%2Cwheelchair_accessible_entrance%2Cgeometry&place_id=${placeId}&key=${API_KEY}`)
       .then((res) => {console.log(res); setSearch(true); setInform(res.data.result)})
       .catch((err) => {
+        setNoData(true);
         console.log('에러');
         console.log(err);
       });
     }
-  }, [placeId]);
+  }, [next]);
 
 
   return (
@@ -71,7 +73,7 @@ function Search() {
             setCount((prev) => (prev+1));
           }}
         >
-          <img src={`${process.env.PUBLIC_URL}/search.png`} className={styles.searchImg} />
+          <img src={`${process.env.PUBLIC_URL}/search.png`} alt='' className={styles.searchImg} />
         </Button>
         </InputGroup>
       </div>
@@ -82,7 +84,7 @@ function Search() {
         {search === false ?
           <>
             <span className={styles.notice}>{noData === true ? <div>NoData</div> : <div>searching...</div>}</span>
-            <img src={`${process.env.PUBLIC_URL}/dog.png`}className={styles.dogImg}/>
+            <img src={`${process.env.PUBLIC_URL}/dog.png`} alt='' className={styles.dogImg}/>
           </>
           : 
           <div className={styles.cardBox}
