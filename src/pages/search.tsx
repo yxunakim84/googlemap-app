@@ -20,27 +20,14 @@ function Search() {
   const navigate = useNavigate();
   const [next, setNext] = useState(0);
   const PROXY = window.location.hostname === 'localhost' ? '' : '/proxy';
-  // const getPlace = async () => {
-  //   fetch(`/maps/api/place/textsearch/json?query=${place}&key=${API_KEY}`)
-  //   .then((res) => res.json())
-  //   .then((data) => {console.log(data.results[0]); setPlaceId(data.results[0].place_id); setNext((prev)=>(prev+1))})
-  //   .catch((err) => {
-  //       console.log(err);
-  //       setNoData(true);
-  //       setSearch(false);
-  //     })
-  //   }
-
-
 
   useEffect(() => {
     if(count === 0) {
       return;
     }
     else {
-      // getPlace();
       axios.get(`${PROXY}/maps/api/place/textsearch/json?query=${place}&key=AIzaSyA7uIJhOTUODaL2FW7MBDqQzoG043xKnSk`)
-      .then((res) => { console.log(place, placeId); setPlaceId(res.data.results[0].place_id); setNext((prev)=>(prev+1))})
+      .then((res) => { setPlaceId(res.data.results[0].place_id); setNext((prev)=>(prev+1))})
       .catch((err) => {
         console.log(err);
         setNoData(true);
@@ -57,10 +44,9 @@ function Search() {
     else {
       setNoData(false);
       axios.get(`${PROXY}/maps/api/place/details/json?fields=name%2Ctypes%2Crating%2Cformatted_phone_number%2Cformatted_address%2Cphoto%2Cwebsite%2Creviews%2Cwheelchair_accessible_entrance%2Cgeometry&place_id=${placeId}&key=AIzaSyA7uIJhOTUODaL2FW7MBDqQzoG043xKnSk`)
-      .then((res) => {console.log(res); setSearch(true); setInform(res.data.result)})
+      .then((res) => { setSearch(true); setInform(res.data.result)})
       .catch((err) => {
         setNoData(true);
-        console.log('에러');
         console.log(err);
       });
     }
