@@ -19,7 +19,7 @@ function Search() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [next, setNext] = useState(0);
-  const DB_HOST = window.location.hostname === 'localhost' ? '' : process.env.REACT_APP_DB_HOST;
+  const DB_HOST = window.location.hostname === 'localhost' ? '' : 'https://maps.googleapis.com';
   // const getPlace = async () => {
   //   fetch(`/maps/api/place/textsearch/json?query=${place}&key=${API_KEY}`)
   //   .then((res) => res.json())
