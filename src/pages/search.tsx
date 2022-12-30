@@ -20,16 +20,16 @@ function Search() {
   const navigate = useNavigate();
   const [next, setNext] = useState(0);
   
-  const getPlace = async () => {
-    fetch(`/maps/api/place/textsearch/json?query=${place}&key=${API_KEY}`)
-    .then((res) => res.json())
-    .then((data) => {console.log(data.results[0]); setPlaceId(data.results[0].place_id); setNext((prev)=>(prev+1))})
-    .catch((err) => {
-        console.log(err);
-        setNoData(true);
-        setSearch(false);
-      })
-    }
+  // const getPlace = async () => {
+  //   fetch(`/maps/api/place/textsearch/json?query=${place}&key=${API_KEY}`)
+  //   .then((res) => res.json())
+  //   .then((data) => {console.log(data.results[0]); setPlaceId(data.results[0].place_id); setNext((prev)=>(prev+1))})
+  //   .catch((err) => {
+  //       console.log(err);
+  //       setNoData(true);
+  //       setSearch(false);
+  //     })
+  //   }
 
 
 
@@ -38,15 +38,15 @@ function Search() {
       return;
     }
     else {
-      getPlace();
-      // axios.get(`/maps/api/place/textsearch/json?query=${place}&key=${API_KEY}`)
-      // // axios.get(`https://maps.googleapis.com/maps/api/place/details/json?fields=/json?query=${place}&key=${API_KEY}`)
-      // .then((res) => { console.log(place, placeId); setPlaceId(res.data.results[0].place_id); setNext((prev)=>(prev+1))})
-      // .catch((err) => {
-      //   console.log(err);
-      //   setNoData(true);
-      //   setSearch(false);
-      // });
+      // getPlace();
+      axios.get(`/maps/api/place/textsearch/json?query=${place}&key=${API_KEY}`)
+      // axios.get(`https://maps.googleapis.com/maps/api/place/details/json?fields=/json?query=${place}&key=${API_KEY}`)
+      .then((res) => { console.log(place, placeId); setPlaceId(res.data.results[0].place_id); setNext((prev)=>(prev+1))})
+      .catch((err) => {
+        console.log(err);
+        setNoData(true);
+        setSearch(false);
+      });
       
     }
   }, [count]);
