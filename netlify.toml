@@ -1,5 +1,5 @@
 [[redirects]]
 from = "/proxy/*"
-  to = "https://maps.googleapis.com"  
+  to = "https://maps.googleapis.com/:splat"  
   status = 200
   force = true
