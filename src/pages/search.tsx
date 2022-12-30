@@ -124,7 +124,7 @@ function Search() {
               
             </div>
             <div className={styles.imgWrapper}>
-              {inform?.photos !== undefined ? <img className={styles.placeImg} src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=500&photo_reference=${inform?.photos[0].photo_reference}&key=${API_KEY}`}/>
+              {inform?.photos !== undefined ? <img className={styles.placeImg} src={`${PROXY}/maps.googleapis.com/maps/api/place/photo?maxwidth=500&photo_reference=${inform?.photos[0].photo_reference}&key=${API_KEY}`}/>
               : <img className={styles.dogImg} src={`${process.env.PUBLIC_URL}/dog.png`}/>
               }
             </div>
